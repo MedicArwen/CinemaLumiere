@@ -3,8 +3,9 @@ namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Film;
+use App\Entity\ICrud;
 
-class FilmService
+class FilmService implements ICrud 
 {
     private $entityManager;
     function __construct(EntityManagerInterface $em)
@@ -13,16 +14,17 @@ class FilmService
     }
     function ajouter($pTitre,$pResume,$pAnneProduction,$pRealisateur,$pListeActeurs,$pImageUrl)
     {
-        $film = Film::create($pTitre,$pResume,$pAnneProduction,$pRealisateur,
-        $pListeActeurs,$pImageUrl);
+        /*$film = Film::create($pTitre,$pResume,$pAnneProduction,$pRealisateur,
+        $pListeActeurs,$pImageUrl);*/
+        $film = new Film();
         $this->entityManager->persist($film);
         $this->entityManager->flush();
     }
-    function supprimer()
+    function supprimer($pId)
     {
 
     }
-    function recupererListe()
+    function liste()
     {
         return $this->entityManager->getRepository(Film::class)->findAll();
     }

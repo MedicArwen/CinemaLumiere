@@ -74,8 +74,30 @@ class Film
     public function __construct()
     {
         $this->seances = new ArrayCollection();
-
     }
+    /*public function fabriquer1($pTitre,$pResume,$pAnneeProduction,$pRealisateur,
+    $pListeActeurs,$pImageUrl)
+    {
+        $this->seances = new ArrayCollection();
+       $this->titre = $pTitre;
+        $this->resume = $pResume;
+        $this->anneeProduction = $pAnneeProduction;
+        $this->realisateur =$pRealisateur;
+        $this->listeActeurs =$pListeActeurs;
+        $this->imageUrl = $pImageUrl;
+    }
+    public function fabriquer2($pTitre,$pResume,$pAnneeProduction,$pRealisateur,
+    $pListeActeurs,$pImageUrl,$pSeances)
+    {
+        $this->seances = $pSeances;
+        $this->titre = $pTitre;
+        $this->resume = $pResume;
+        $this->anneeProduction = $pAnneeProduction;
+        $this->realisateur =$pRealisateur;
+        $this->listeActeurs =$pListeActeurs;
+        $this->imageUrl = $pImageUrl;
+    }
+*/
     public static function create($pTitre,$pResume,$pAnneeProduction,$pRealisateur,
     $pListeActeurs,$pImageUrl)
     {
