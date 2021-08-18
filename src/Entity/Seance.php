@@ -38,6 +38,16 @@ class Seance
      */
     private $film;
 
+
+    public static function creer($pDateDebut,$pDateFin,$pNumeroSalle,$pFilm)
+    {
+        $seance = new Seance();
+        $seance->dateDebut = $pDateDebut;
+        $seance->dateFin = $pDateFin;
+        $seance->numeroSalle = $pNumeroSalle;
+        $seance->film=$pFilm;
+        return $seance;
+    }
     public function getId(): ?int
     {
         return $this->id;

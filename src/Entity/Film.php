@@ -98,7 +98,7 @@ class Film
         $this->imageUrl = $pImageUrl;
     }
 */
-    public static function create($pTitre,$pResume,$pAnneeProduction,$pRealisateur,
+    public static function creer($pTitre,$pResume,$pAnneeProduction,$pRealisateur,
     $pListeActeurs,$pImageUrl)
     {
         $film = new Film();

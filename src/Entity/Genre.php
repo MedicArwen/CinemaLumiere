@@ -33,7 +33,7 @@ class Genre
     {
         $this->films = new ArrayCollection();
     }
-    public static function create($pIntitule)
+    public static function creer($pIntitule)
     {
         $genre = new Genre();
         $genre->intitule = $pIntitule;

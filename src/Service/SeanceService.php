@@ -1,39 +1,38 @@
 <?php
+
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Genre;
+use App\Entity\Seance;
 use App\Entity\ICrud;
 
-class GenreService implements ICrud
+class SeanceService implements ICrud
 {
     private $entityManager;
     public function __construct(EntityManagerInterface $em)
     {
         $this->entityManager = $em;
     }
-    public function ajouter($pIntitule)
+    public function ajouter($pDateDebut, $pDateFin, $pNumeroSalle, $pFilm)
     {
-        $genre = Genre::creer($pIntitule);
-        $this->entityManager->persist($genre);
+
+        $seance = Seance::creer($pDateDebut, $pDateFin, $pNumeroSalle, $pFilm);
+
+        $this->entityManager->persist($seance);
         $this->entityManager->flush();
     }
     public function liste()
     {
-        return $this->entityManager->getRepository(Genre::class)->findAll();
-  
+        return $this->entityManager->getRepository(Seance::class)->findAll();
     }
     public function sauvegarder()
     {
-        
     }
     public function lire($pId)
     {
-        return $this->entityManager->getRepository(Genre::class)->find($pId);
-  
+        return $this->entityManager->getRepository(Seance::class)->find($pId);
     }
     public function supprimer($pId)
     {
-        
     }
 }
