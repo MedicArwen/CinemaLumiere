@@ -6,6 +6,8 @@ use App\Service\GenreService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Genre;
+use App\Form\GenreFormType;
 
 class AdministrationController extends AbstractController
 {
@@ -28,4 +30,14 @@ class AdministrationController extends AbstractController
             'genres' => $genres
         ]);
     }
+    /**
+     * @Route("administration/genres/add",name="admin_creer_genre")
+     */
+    public function creerGenres(GenreService $genreService):Response
+    {
+        $genre = new Genre();
+        $formulaire = $this->createForm(GenreFormType::class,$genre);
+        return $this->render('administration/genres/form_genres.html.twig', [
+            'formulaire' => $formulaire->createView()]);
+        }
 }
