@@ -15,17 +15,17 @@ class AdministrationController extends AbstractController
     public function index(): Response
     {
         return $this->render('administration/index.html.twig', [
-            'controller_name' => 'AdministrationController',
+            'controller_name' => 'AdministrationController'
         ]);
     }
     /**
-     * @Route("administration/genres",name="liste_genres")
+     * @Route("administration/genres",name="admin_liste_genres")
      */
     public function listeGenres(GenreService $genreService):Response
     {
         $genres = $genreService->liste();
         return $this->render('administration/genres/liste_genres.html.twig', [
-            'genres' => $genres,
+            'genres' => $genres
         ]);
     }
 }
