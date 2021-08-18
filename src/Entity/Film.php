@@ -59,11 +59,35 @@ class Film
      */
     private $seances;
 
+ /*  public function __construct($pTitre,$pResume,$pAnneeProduction,$pRealisateur,
+    $pListeActeurs,$pImageUrl)
+    {
+        $this->seances = new ArrayCollection();
+        $this->titre = $pTitre;
+        $this->resume = $pResume;
+        $this->anneeProduction = $pAnneeProduction;
+        $this->realisateur =$pRealisateur;
+        $this->listeActeurs =$pListeActeurs;
+        $this->imageUrl = $pImageUrl;
+    }*/
+
     public function __construct()
     {
         $this->seances = new ArrayCollection();
-    }
 
+    }
+    public static function create($pTitre,$pResume,$pAnneeProduction,$pRealisateur,
+    $pListeActeurs,$pImageUrl)
+    {
+        $film = new Film();
+        $film->titre = $pTitre;
+        $film->resume = $pResume;
+        $film->anneeProduction = $pAnneeProduction;
+        $film->realisateur =$pRealisateur;
+        $film->listeActeurs =$pListeActeurs;
+        $film->imageUrl = $pImageUrl;
+        return $film;
+    }
     public function getId(): ?int
     {
         return $this->id;

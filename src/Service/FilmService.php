@@ -2,6 +2,7 @@
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Film;
 
 class FilmService
 {
@@ -10,9 +11,12 @@ class FilmService
     {
         $this->entityManager = $em;
     }
-    function ajouter()
+    function ajouter($pTitre,$pResume,$pAnneProduction,$pRealisateur,$pListeActeurs,$pImageUrl)
     {
-        
+        $film = Film::create($pTitre,$pResume,$pAnneProduction,$pRealisateur,
+        $pListeActeurs,$pImageUrl);
+        $this->entityManager->persist($film);
+        $this->entityManager->flush();
     }
     function supprimer()
     {
@@ -20,11 +24,11 @@ class FilmService
     }
     function recupererListe()
     {
-
+        return $this->entityManager->getRepository(Film::class)->findAll();
     }
-    function recupererFilm()
+    function lire($pId)
     {
-
+        return $this->entityManager->getRepository(Film::class)->find($pId);
     }
     function sauvegarder()
     {
