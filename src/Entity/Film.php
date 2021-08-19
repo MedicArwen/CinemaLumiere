@@ -228,4 +228,8 @@ class Film
 
         return $this;
     }
+    function __toString()
+    {
+        return $this->titre.' ('.strval($this->anneeProduction).')';
+    }
 }
