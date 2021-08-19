@@ -13,11 +13,13 @@ class SeanceService implements ICrud
     {
         $this->entityManager = $em;
     }
-    public function ajouter($pDateDebut, $pDateFin, $pNumeroSalle, $pFilm)
+    public function ajouter($pData)
     {
 
-        $seance = Seance::creer($pDateDebut, $pDateFin, $pNumeroSalle, $pFilm);
-
+        $seance = Seance::creer($pData->getDateFin(),
+        $pData->getDateDebut(),
+        $pData->getNumeroSalle(),
+        $pData->getFilm());
         $this->entityManager->persist($seance);
         $this->entityManager->flush();
     }

@@ -6,6 +6,7 @@ use App\Entity\Film;
 use App\Service\GenreService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Genre;
 use App\Entity\Seance;
@@ -42,7 +43,20 @@ class AdministrationController extends AbstractController
     public function creerGenres(GenreService $pGenreService):Response
     {
         $genre = new Genre();
+        
         $formulaire = $this->createForm(GenreFormType::class,$genre);
+
+        $request = Request::createFromGlobals();
+
+        $formulaire->handleRequest($request);
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $pGenreService->ajouter($formulaire->getData());
+            return $this->redirectToRoute('task_success');
+
+        }
+        else
         return $this->render('administration/genres/form_genres.html.twig', [
             'formulaire' => $formulaire->createView()]);
         }
@@ -52,7 +66,7 @@ class AdministrationController extends AbstractController
     public function listeFilms(FilmService $pFilmService):Response
     {
         $films = $pFilmService->liste();
-        return $this->render('administration/genres/liste_films.html.twig', [
+        return $this->render('administration/films/liste_films.html.twig', [
             'films' => $films
         ]);
     }
@@ -63,6 +77,16 @@ class AdministrationController extends AbstractController
         {
             $film = new Film();
             $formulaire = $this->createForm(FilmFormType::class,$film);
+            $request = Request::createFromGlobals();
+            $formulaire->handleRequest($request);
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $pFilmService->ajouter($formulaire->getData());
+            return $this->redirectToRoute('task_success');
+
+        }
+        else
             return $this->render('administration/films/form_films.html.twig',
             ['formulaire' => $formulaire->createView()]);
         }
@@ -81,9 +105,29 @@ class AdministrationController extends AbstractController
  */
         public function creerSeances(SeanceService $pSeanceService)
     {
+        
         $seance = new Seance();
         $formulaire = $this->createForm(SeanceFormType::class,$seance);
+        $request = Request::createFromGlobals();
+        $formulaire->handleRequest($request);
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            // $form->getData() holds the submitted values
+            // but, the original `$task` variable has also been updated
+            $pSeanceService->ajouter($formulaire->getData());
+            return $this->redirectToRoute('task_success');
+
+        }
+        else 
         return $this->render('administration/seances/form_seances.html.twig',
         ['formulaire' => $formulaire->createView()]);
+    }
+    /**
+     * @Route("/administration/success", name="task_success")
+     */
+    public function success(): Response
+    {
+        return $this->render('administration/success.html.twig', [
+            'controller_name' => 'AdministrationController'
+        ]);
     }
 }

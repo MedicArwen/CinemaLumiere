@@ -12,9 +12,9 @@ class GenreService implements ICrud
     {
         $this->entityManager = $em;
     }
-    public function ajouter($pIntitule)
+    public function ajouter($pData)
     {
-        $genre = Genre::creer($pIntitule);
+        $genre = Genre::creer($pData->getIntitule());
         $this->entityManager->persist($genre);
         $this->entityManager->flush();
     }

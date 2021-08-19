@@ -1,29 +1,35 @@
 <?php
+
 namespace App\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Film;
 use App\Entity\ICrud;
 
-class FilmService implements ICrud 
+class FilmService implements ICrud
 {
     private $entityManager;
     public function __construct(EntityManagerInterface $em)
     {
         $this->entityManager = $em;
     }
-    public function ajouter($pTitre,$pResume,$pAnneProduction,$pRealisateur,$pListeActeurs,$pImageUrl)
+    public function ajouter($pData)
     {
         // la fonction static permet d'éviter de devoir instantier le film avec le
         // constructeur par défaut
-        $film = Film::creer($pTitre,$pResume,$pAnneProduction,$pRealisateur,
-        $pListeActeurs,$pImageUrl);
+        $film = Film::creer(
+            $pData->getTitre(),
+            $pData->getResume(),
+            $pData->getAnneeProduction(),
+            $pData->getRealisateur(),
+            $pData->getListeActeurs(),
+            $pData->getImageUrl()
+        );
         $this->entityManager->persist($film);
         $this->entityManager->flush();
     }
     public function supprimer($pId)
     {
-
     }
     public function liste()
     {
@@ -35,6 +41,5 @@ class FilmService implements ICrud
     }
     public function sauvegarder()
     {
-        
     }
 }

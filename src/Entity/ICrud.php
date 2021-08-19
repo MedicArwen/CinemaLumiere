@@ -2,7 +2,7 @@
 namespace App\Entity;
 interface ICrud
 {
-  //  public function ajouter();
+  public function ajouter($pData);
   public function liste();
   public function lire($pId);
   public function sauvegarder();
